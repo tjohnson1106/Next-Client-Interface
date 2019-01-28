@@ -21,15 +21,18 @@ interface Options {
 
 function create(initialState: any, { getToken }: Options) {
   const httpLink = createHttpLink({
-    uri: "http://localhost:3000",
+    uri: "http://localhost:4000",
     credentials: "include"
   });
+
+  // adds to header
+  // cookie name -> qid
   const authLink = setContext((_options, { headers }) => {
     const token = getToken();
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : ""
+        cookie: token ? `qid=${token}` : ""
       }
     };
   });

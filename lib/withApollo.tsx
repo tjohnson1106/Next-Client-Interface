@@ -33,7 +33,7 @@ export default (App: any) => {
       const apollo = initApollo(
         {},
         {
-          getToken: () => token
+          getToken: () => parseCookies(req).qid
         }
       );
 
