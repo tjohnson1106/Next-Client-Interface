@@ -21,11 +21,10 @@ interface Options {
 
 function create(initialState: any, { getToken }: Options) {
   const httpLink = createHttpLink({
-    uri: "https://api.graph.cool/simple/v1/cj5geu3slxl7t0127y8sity9r",
-    credentials: "same-origin"
+    uri: "http://localhost:3000",
+    credentials: "include"
   });
-
-  const authLink = setContext((_, { headers }) => {
+  const authLink = setContext((_options, { headers }) => {
     const token = getToken();
     return {
       headers: {
@@ -44,7 +43,7 @@ function create(initialState: any, { getToken }: Options) {
   });
 }
 
-export default function initApollo(initialState: any, options) {
+export default function initApollo(initialState: any, options: Options) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!isBrowser) {
