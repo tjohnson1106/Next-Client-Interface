@@ -25,3 +25,4 @@ yarn dev
 ```
 
 A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this in your `test` scripts, say, for your CI process.
+# Next-Client-Interface
