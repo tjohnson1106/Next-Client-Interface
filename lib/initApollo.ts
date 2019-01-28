@@ -6,10 +6,9 @@ import {
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import fetch from "isomorphic-unfetch";
+import { isBrowser } from "./isBrowser";
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
-
-const isBrowser: boolean = (process as any).browser;
 
 // Polyfill fetch() on the server (used by apollo-client)
 if (!isBrowser) {
