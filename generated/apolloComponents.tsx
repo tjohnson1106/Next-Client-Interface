@@ -27,32 +27,30 @@ export type Upload = any;
 // Documents
 // ====================================================
 
-export namespace Login {
-  export type Variables = {
-    email: string;
-    password: string;
-  };
+export type LoginVariables = {
+  email: string;
+  password: string;
+};
 
-  export type Mutation = {
-    __typename?: "Mutation";
+export type LoginMutation = {
+  __typename?: "Mutation";
 
-    login: Maybe<Login>;
-  };
+  login: Maybe<LoginLogin>;
+};
 
-  export type Login = {
-    __typename?: "User";
+export type LoginLogin = {
+  __typename?: "User";
 
-    id: string;
+  id: string;
 
-    firstName: string;
+  firstName: string;
 
-    lastName: string;
+  lastName: string;
 
-    email: string;
+  email: string;
 
-    name: string;
-  };
-}
+  name: string;
+};
 
 import * as ReactApollo from "react-apollo";
 import * as React from "react";
@@ -63,48 +61,51 @@ import gql from "graphql-tag";
 // Components
 // ====================================================
 
-export namespace Login {
-  export const Document = gql`
-    mutation Login($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
-        id
-        firstName
-        lastName
-        email
-        name
-      }
-    }
-  `;
-  export class Component extends React.Component<
-    Partial<ReactApollo.MutationProps<Mutation, Variables>>
-  > {
-    render() {
-      return (
-        <ReactApollo.Mutation<Mutation, Variables>
-          mutation={Document}
-          {...(this as any)["props"] as any}
-        />
-      );
+export const LoginDocument = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      id
+      firstName
+      lastName
+      email
+      name
     }
   }
-  export type Props<TChildProps = any> = Partial<
-    ReactApollo.MutateProps<Mutation, Variables>
-  > &
-    TChildProps;
-  export type MutationFn = ReactApollo.MutationFn<Mutation, Variables>;
-  export function HOC<TProps, TChildProps = any>(
-    operationOptions:
-      | ReactApollo.OperationOption<
-          TProps,
-          Mutation,
-          Variables,
-          Props<TChildProps>
-        >
-      | undefined
-  ) {
-    return ReactApollo.graphql<TProps, Mutation, Variables, Props<TChildProps>>(
-      Document,
-      operationOptions
+`;
+export class LoginComponent extends React.Component<
+  Partial<ReactApollo.MutationProps<LoginMutation, LoginVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<LoginMutation, LoginVariables>
+        mutation={LoginDocument}
+        {...(this as any)["props"] as any}
+      />
     );
   }
+}
+export type LoginProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<LoginMutation, LoginVariables>
+> &
+  TChildProps;
+export type LoginMutationFn = ReactApollo.MutationFn<
+  LoginMutation,
+  LoginVariables
+>;
+export function LoginHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        LoginMutation,
+        LoginVariables,
+        LoginProps<TChildProps>
+      >
+    | undefined
+) {
+  return ReactApollo.graphql<
+    TProps,
+    LoginMutation,
+    LoginVariables,
+    LoginProps<TChildProps>
+  >(LoginDocument, operationOptions);
 }

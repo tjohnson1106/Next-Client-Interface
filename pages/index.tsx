@@ -2,7 +2,13 @@ import * as React from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import { Mutation } from "react-apollo";
-import { gql } from "apollo-boost";
+
+import { loginMutation } from "../graphql/user/mutations/login";
+import {
+  LoginVariables,
+  LoginMutation,
+  LoginComponent
+} from "../generated/apolloComponents";
 
 const IndexPage: React.FunctionComponent = () => {
   return (
@@ -14,30 +20,25 @@ const IndexPage: React.FunctionComponent = () => {
         </Link>
       </p>
 
-      <Mutation
-        mutation={gql`
-          mutation {
-            login(email: "tytyty@tytytyfailTest.com", password: "password01") {
-              id
-              firstName
-              lastName
-              name
-              email
-            }
-          }
-        `}
-      >
+      {/* mutation with type generics */}
+      <LoginComponent>
         {(mutate) => (
           <button
             onClick={async () => {
-              const response = await mutate();
+              const response = await mutate({
+                variables: {
+                  email: "test@test.com",
+                  password: "password01"
+                }
+              });
+
               console.log("response: ", response);
             }}
           >
             Call login mutation
           </button>
         )}
-      </Mutation>
+      </LoginComponent>
     </Layout>
   );
 };
