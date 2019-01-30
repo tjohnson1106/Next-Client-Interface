@@ -11,5 +11,9 @@ export const InputField = ({
   form: _,
   ...props
 }: FieldProps & InputProps) => {
-  return <input {...field} {...props} />;
+  return (
+    <div>
+      <input {...field} {...props} />
+    </div>
+  );
 };
