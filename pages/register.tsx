@@ -12,6 +12,8 @@ export default () => {
       <RegisterComponent>
         {(register) => (
           <Formik
+            validateOnBlur={false}
+            validateOnChange={false}
             onSubmit={async (data, { setErrors }) => {
               try {
                 const response = await register({
@@ -21,6 +23,7 @@ export default () => {
                 });
                 console.log("response", response, "response");
               } catch (err) {
+                // most likely validation will be handled via Yup, placeholder for now
                 console.log("err: ", err.graphQLErrors);
                 const errors: { [key: string]: string } = {};
                 err.graphQLErrors[0].validationErrors.forEach(
@@ -32,6 +35,7 @@ export default () => {
                     );
                   }
                 );
+                console.log(errors);
                 setErrors(errors);
               }
             }}
