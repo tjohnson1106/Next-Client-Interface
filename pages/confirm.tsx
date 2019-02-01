@@ -1,12 +1,13 @@
-import React from "react";
-import PureComponent = React.PureComponent;
+import React, { PureComponent } from "react";
+import { NextContext } from "next";
 
 class Confirm extends PureComponent {
-  getInitialProps = (...vals: any[]) => {
-    console.log(vals);
+  static getInitialProps = ({ query: { token } }: NextContext) => {
+    return { token };
   };
 
   render() {
+    console.log(this.props);
     return <div>Confirm</div>;
   }
 }
