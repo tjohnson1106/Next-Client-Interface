@@ -20,7 +20,7 @@ export default () => {
                 variables: data
               });
               console.log("response", response, "response");
-              if (response && response.data && response.data.login) {
+              if (response && response.data && !response.data.login) {
                 setErrors({
                   email: "Invalid login"
                 });
