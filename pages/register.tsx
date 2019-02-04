@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Field } from "formik";
+import Router from "next/router";
 
 import Layout from "../components/Layout";
 import { InputField } from "../components/fields/InputField";
@@ -22,6 +23,7 @@ export default () => {
                   }
                 });
                 console.log("response", response, "response");
+                Router.push("/check-email");
               } catch (err) {
                 // most likely validation will be handled via Yup, placeholder for now
                 console.log("err: ", err.graphQLErrors);
