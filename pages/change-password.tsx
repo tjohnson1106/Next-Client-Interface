@@ -1,12 +1,13 @@
 import React from "react";
 import { Formik, Field } from "formik";
 import Router from "next/router";
+import { NextContext } from "next";
 
 import Layout from "../components/Layout";
 import { InputField } from "../components/fields/InputField";
 import { ChangePasswordComponent } from "../generated/apolloComponents";
 
-export default () => {
+const ChangePassword = ({ token }: { token: string }) => {
   return (
     <Layout title="Change Password page">
       {/* mutation */}
@@ -18,7 +19,7 @@ export default () => {
                 variables: {
                   data: {
                     password: data.password,
-                    token: ""
+                    token
                   }
                 }
               });
@@ -47,3 +48,14 @@ export default () => {
     </Layout>
   );
 };
+
+// remember it's better type checking to pass the value to NextContext
+ChangePassword.getInitialProps = ({
+  query: { token }
+}: NextContext<{ token: string }>) => {
+  return {
+    token
+  };
+};
+
+export default ChangePassword;
