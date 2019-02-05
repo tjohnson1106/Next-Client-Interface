@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { MeComponent } from "../generated/apolloComponents";
 
 type Props = {
   title?: string;
@@ -38,6 +39,19 @@ const Layout: React.FunctionComponent<Props> = ({
           <a>login</a>
         </Link>{" "}
         |{" "}
+        <MeComponent>
+          {({ data, loading }) => {
+            if (!data || loading || !data.me) {
+              return null;
+            }
+            // update cache -> login page
+            return (
+              <Link href="/logout">
+                <a>logout</a>
+              </Link>
+            );
+          }}
+        </MeComponent>
       </nav>
     </header>
     {children}
