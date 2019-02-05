@@ -32,7 +32,7 @@ export default () => {
                   component={InputField}
                 />
 
-                <button type="submit">send email</button>
+                <button type="submit">forgot password</button>
               </form>
             )}
           </Formik>
