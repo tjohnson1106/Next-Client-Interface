@@ -44,6 +44,7 @@ const Layout: React.FunctionComponent<Props> = ({
             if (!data || loading || !data.me) {
               return null;
             }
+            // update cache -> login page
             return (
               <Link href="/logout">
                 <a>logout</a>
