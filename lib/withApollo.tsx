@@ -7,6 +7,7 @@ import Head from "next/head";
 import initApollo from "./initApollo";
 import { isBrowser } from "./isBrowser";
 import { ApolloClient, NormalizedCacheObject } from "apollo-boost";
+import redirect from "./redirect";
 
 // TODO: where are req types coming from? node packages?
 function parseCookies(req?: any, options = {}) {
@@ -53,7 +54,6 @@ export default (App: any) => {
       if (!isBrowser) {
         try {
           await getDataFromTree(
-            //   @ts-ignore
             <App
               {...appProps}
               Component={Component}
@@ -63,6 +63,10 @@ export default (App: any) => {
           );
         } catch (error) {
           console.error("Error while running `getDataFromTree`", error);
+
+          if (error.message.includes("not authenticated")) {
+            redirect(ctx.ctx, "/login");
+          }
         }
 
         // getDataFromTree does not call componentWillUnmount
