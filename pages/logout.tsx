@@ -1,6 +1,5 @@
 // @ts-ignore
 import React from "react";
-import Router from "next/router";
 
 import { ApolloContext } from "../interfaces/ApolloContext";
 import { logoutMutation } from "../graphql/user/mutations/logout";
