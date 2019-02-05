@@ -1,17 +1,27 @@
 import * as React from "react";
 import Link from "next/link";
 import Head from "next/head";
+import styled from "styled-components";
+
 import { MeComponent } from "../generated/apolloComponents";
 
 type Props = {
   title?: string;
 };
 
+const Container = styled("div")`
+  background-color: #ececec;
+`;
+
+const Footer = styled("footer")`
+  background-color: #ececec;
+`;
+
 const Layout: React.FunctionComponent<Props> = ({
   children,
   title = "This is the default title"
 }) => (
-  <div>
+  <Container>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -55,11 +65,11 @@ const Layout: React.FunctionComponent<Props> = ({
       </nav>
     </header>
     {children}
-    <footer>
+    <Footer>
       <hr />
       <span>I'm here to stay (Footer)</span>
-    </footer>
-  </div>
+    </Footer>
+  </Container>
 );
 
 export default Layout;
