@@ -4,18 +4,19 @@ import Router from "next/router";
 
 import { ApolloContext } from "../interfaces/ApolloContext";
 import { logoutMutation } from "../graphql/user/mutations/logout";
+import redirect from "../lib/redirect";
 
 const Logout = () => {
   return null;
 };
 
-Logout.getInitialProps = async ({ apolloClient }: ApolloContext) => {
+Logout.getInitialProps = async ({ apolloClient, ...ctx }: ApolloContext) => {
   await apolloClient.mutate({
     mutation: logoutMutation
   });
   // Apollo store should be cleared after logout
   await apolloClient.resetStore();
-  Router.push("/login");
+  redirect(ctx, "/login");
   return {};
 };
 
